@@ -35,6 +35,8 @@ const AC_THRESHOLD = 75;
 const HEATER_THRESHOLD = 62;
 
 // define a route handler for the default home page
+// this page will display how many times the ac and the heat turned on in a specific time range from user's params in URL
+// the formate of the URL would be, for examople http://localhost:8080/?startDate=06/18/1%2001:00:00&endDate=06/19/2020%2000:00:00
 app.get("/", async (req, res) => {
   let counterAc = 0;
   let counterHeat = 0;
@@ -66,6 +68,7 @@ app.get("/", async (req, res) => {
   );
 });
 
+// this page will display how many times the ac and the heat turned on at least once based on the whole data file.
 app.get("/report", async (req, res) => {
   const csvData: ArrayHistoryData[] = await csv().fromFile(csvFilePath);
   // Look up map to store counter for date that turns on AC/Heater at least 1 time
